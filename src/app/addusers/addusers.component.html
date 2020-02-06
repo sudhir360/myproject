@@ -1,0 +1,133 @@
+<style>
+  .help-block {
+    color: red;
+  }
+</style>
+
+
+<div class="page-title">
+  <div class="row">
+      <div class="col-sm-6">
+          <h4 class="mb-0"> Maps</h4>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
+          <li class="breadcrumb-item"><a href="#" class="default-color">Home</a></li>
+          <li class="breadcrumb-item active">Maps</li>
+        </ol>
+      </div>
+    </div>
+</div>
+<div class="row">
+  
+  <div class="col-xl-6 mb-30">
+    <div class="card card-statistics mb-30">
+      <div class="card-body">
+        <input type="text" [(ngModel)]="name">
+        <h5 class="card-title">Basic form {{name}}</h5>
+       
+        <form [formGroup]="Addusers">
+          <div class="form-group"
+            [ngClass]="{ 'has-error': Addusers.get('name').errors && (Addusers.get('name').touched || Addusers.get('name').dirty)}">
+            <label for="exampleInputEmail1">name</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter name">
+            <span class="help-block"
+              *ngIf="Addusers.get('name').errors && (Addusers.get('name').touched || Addusers.get('name').dirty)">
+              <span *ngIf="Addusers.get('name').errors.required"> Name is required</span>
+
+
+              <span *ngIf="Addusers.get('name').errors.minlength || Addusers.get('name').errors.maxlength"> must be
+                greater is required
+              </span>
+            </span>
+          </div>
+          <div class="form-group"
+            [ngClass]="{ 'has-error': Addusers.get('username').errors && (Addusers.get('username').touched || Addusers.get('username').dirty)}">
+            <label for="exampleInputPassword1">username</label>
+            <input type="email" formControlName="username" class="form-control" placeholder="username">
+            <span class="help-block"
+              *ngIf="Addusers.get('username').errors && (Addusers.get('username').touched || Addusers.get('username').dirty)">
+              <span *ngIf="Addusers.get('username').errors.required"> username is required</span>
+                <span *ngIf="Addusers.get('username').errors.email">Email must be a valid email address</span>
+            </span>
+
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" formControlName="Password" placeholder="Password"
+              >
+            <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            </div> -->
+          </div>
+
+          <button type="submit" class="btn btn-primary" *ngIf="IsAdd" (click)="saveusers()">submit</button>
+          <button type="submit" class="btn btn-primary" *ngIf="!IsAdd" (click)="updateusers()">update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12" id="palnlist">
+    <div class="card card-statistics h-100">
+        <div class="card-body">
+
+      
+            <div class="table-responsive">
+               
+
+                <table class="table center-aligned-table mb-0"  id="datatable">
+                  <thead>
+                    <tr>
+          
+                      <th class="text-center">Name</th>
+                      <th class="text-center">username</th>
+                      <th class="text-center">password</th>
+                      <th class="text-center">Action</th>
+          
+                    </tr>
+                  </thead>
+          
+                  <tbody class="text-center">
+          
+                    <tr *ngFor="let us of userdetails">
+                      <td>{{us.name}}</td>
+                      <td>{{us.username}}</td>
+                      <td>{{us.Password}}</td>
+          
+                      <td>
+                        <button (click)="edituser(us)" class="btn btn-primary" data-original-title="Edit"> Edit</button>
+                        <button (click)="deleteuser(us)" class="btn btn-danger" data-original-title="Edit"> delete</button>
+                        <!-- <a data-toggle="tooltip" title="" (click)="updateusers(user)" class="btn btn-primary" data-original-title="Edit">
+                                  <i class="fa fa-edit"></i>
+                              </a>
+                              <a  data-toggle="tooltip" title="" style="margin-left: 5px;" (click)="deleteSubCategory(user)" class="btn btn-danger" >
+                                  <i class="fa fa-trash-o"></i>
+                              </a> -->
+                      </td>
+          
+          
+                    </tr>
+                  </tbody>
+                  <tfoot class="text-center">
+                    <tr>
+          
+                      <th class="text-center">Name</th>
+                      <th class="text-center">username</th>
+                      <th class="text-center">password</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
